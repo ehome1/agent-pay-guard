@@ -1,0 +1,43 @@
+# Agent Pay Guard — Conservative (严格模式)
+# 适用：初次接入、高价值交易、对安全要求极高的团队
+
+safety:
+  max_transaction_hard_cap: 5000      # $50
+  rate_limit: 10                       # 10次/分钟
+
+agents:
+  my-agent:
+    budget:
+      per_transaction: 1000            # $10
+      daily: 5000                      # $50
+      monthly: 50000                   # $500
+
+    merchants:
+      mode: allow
+      list:
+        - api.openai.com
+        - api.anthropic.com
+        # 添加你信任的商户
+
+    categories:
+      mode: deny
+      list:
+        - gambling
+        - adult
+        - crypto_exchange
+
+    protocols:
+      - stripe
+
+    schedule:
+      timezone: UTC
+      allowed_hours: "08:00-20:00"
+      allowed_days: [mon, tue, wed, thu, fri]
+
+    human_approval:
+      above: 2000                      # 超过 $20 需人工确认
+
+default:
+  budget:
+    per_transaction: 500               # 未声明的 Agent: $5/笔
+    daily: 1000                        # $10/天

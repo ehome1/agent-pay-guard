@@ -1,0 +1,34 @@
+# Agent Pay Guard — Permissive (宽松模式)
+# 适用：可信环境、内部测试、低价值高频微支付（如 x402 API 调用）
+
+safety:
+  max_transaction_hard_cap: 100000    # $1,000
+  rate_limit: 300                      # 高频微支付场景
+
+agents:
+  my-agent:
+    budget:
+      per_transaction: 10000           # $100
+      daily: 200000                    # $2,000
+      monthly: 2000000                 # $20,000
+
+    merchants:
+      mode: deny
+      list: []                         # 不拉黑任何商户
+
+    categories:
+      mode: deny
+      list:
+        - gambling
+
+    protocols:
+      - stripe
+      - x402
+
+    human_approval:
+      above: 50000                     # 超过 $500 才需确认
+
+default:
+  budget:
+    per_transaction: 5000
+    daily: 50000

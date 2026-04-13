@@ -1,0 +1,5 @@
+node_modules/
+dist/
+.agent-pay-guard/
+*.tgz
+.DS_Store

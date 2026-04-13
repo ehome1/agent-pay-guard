@@ -1,0 +1,37 @@
+# Agent Pay Guard — Standard (均衡模式)
+# 适用：大多数开发场景，平衡安全和效率
+
+safety:
+  max_transaction_hard_cap: 50000     # $500
+  rate_limit: 60
+
+agents:
+  my-agent:
+    budget:
+      per_transaction: 5000            # $50
+      daily: 50000                     # $500
+      monthly: 500000                  # $5,000
+
+    merchants:
+      mode: deny
+      list:
+        - known-scam-site.com
+        # 黑名单模式，默认放行
+
+    categories:
+      mode: deny
+      list:
+        - gambling
+        - adult
+
+    protocols:
+      - stripe
+      - x402
+
+    human_approval:
+      above: 10000                     # 超过 $100 需人工确认
+
+default:
+  budget:
+    per_transaction: 2000
+    daily: 10000
