@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "description": "Local-first payment guard for AI agents. Check before your agent spends.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ehome1/agent-pay-guard.git"
+  },
   "type": "module",
   "main": "./dist/cjs/index.cjs",
   "module": "./dist/esm/index.js",
