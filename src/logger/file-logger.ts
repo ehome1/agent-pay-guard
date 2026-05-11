@@ -17,6 +17,7 @@ export interface LogEntry {
   currency: string
   merchant: string
   category: string | null
+  description: string | null
   decision: 'allow' | 'deny'
   ruleHit: string | null
   reason: string | null
@@ -68,6 +69,7 @@ export class FileLogger {
       currency: intent.currency,
       merchant: intent.merchant,
       category: intent.category ?? null,
+      description: intent.description ?? null,
       decision: decision.allowed ? 'allow' : 'deny',
       ruleHit: decision.ruleHit ?? null,
       reason: decision.reason ?? null,

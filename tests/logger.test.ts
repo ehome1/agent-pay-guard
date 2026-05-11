@@ -138,4 +138,24 @@ describe('logger/file-logger', () => {
     const entries = readLogLines(TMP_DIR)
     expect(entries[0]!.category).toBeNull()
   })
+
+  it('should log description when provided', () => {
+    const logger = new FileLogger(TMP_DIR)
+    logger.log(
+      makeIntent({ description: 'Paying for GPT-4 call to summarize user document #1234' }),
+      makeDecision(),
+      defaultContext,
+    )
+
+    const entries = readLogLines(TMP_DIR)
+    expect(entries[0]!.description).toBe('Paying for GPT-4 call to summarize user document #1234')
+  })
+
+  it('should set description to null when not provided', () => {
+    const logger = new FileLogger(TMP_DIR)
+    logger.log(makeIntent(), makeDecision(), defaultContext)
+
+    const entries = readLogLines(TMP_DIR)
+    expect(entries[0]!.description).toBeNull()
+  })
 })
